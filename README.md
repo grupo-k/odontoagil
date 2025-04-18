@@ -9,6 +9,9 @@ Desenvolvimento do projeto OdontoÁgil do TADS da UDESC
 - Carlos Alberto Zapelini Farias;
 - Michel Luiz Ayres Pontes Junior;
 - Pablo Idalgo Gonzelez.
+
+### 🗄️ Tarefas
+https://trello.com/invite/b/6802a136f3a7cb3f0e572f86/ATTI6308c2799570c18fc3da4924f55126eaE8A51ED3/odontoagil
   
 ### 🚨 Arquivos Importantes 
 ##### Protótipo de Interfaces gerado na matéria Programação Web
