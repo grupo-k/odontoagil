@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pacientes/listar_paciente.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <h1>Pacientes</h1>
+        <a href="{% url 'cadastrar_paciente' %}" class="btn-novo">Cadastrar Novo Paciente</a>
+    </div>
+
+    {% if pacientes %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                    <th>CPF</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paciente in pacientes %}
+                <tr>
+                    <td>{{ paciente.nome_completo }}</td>
+                    <td>{{ paciente.telefone }}</td>
+                    <td>{{ paciente.email }}</td>
+                    <td>{{ paciente.cpf }}</td>
+                    <td>
+                        <a href="{% url 'editar_paciente' paciente.id %}" class="btn-editar">Editar</a>
+                        <a href="{% url 'remover_paciente' paciente.id %}" class="btn-remover" onclick="return confirm('Tem certeza que deseja remover este paciente?')">Remover</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nenhum paciente cadastrado.</p>
+    {% endif %}
+{% endblock %}

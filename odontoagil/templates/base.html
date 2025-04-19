@@ -5,15 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OdontoÁgil</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    {% block extra_css %}
+    {% endblock %}
 </head>
 <body>
 
     <nav>
         <ul>
-            <img src="../static/img/logo.png" alt="Logotipo" width="10%"/>
+            <img src="../static/img/logo.png" alt="Logotipo" width="12%"/>
             <li><a href="{% url 'index' %}">Início</a></li>
-            <li><a href="{% url 'paciente-list' %}">Pacientes</a></li>
+            <li><a href="{% url 'listar_paciente' %}">Pacientes</a></li>
         </ul>
     </nav>
 

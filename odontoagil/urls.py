@@ -17,10 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .views import index, paciente_list
+from .views import index, listar_paciente
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('pacientes/', paciente_list, name='paciente-list'),
+    path('pacientes/', listar_paciente, name='listar_paciente'),
+    path('', index, name='cadastrar_paciente'),
+    path('pacientes/<int:id>', index, name='remover_paciente'),
+    path('pacientes/<int:id>', index, name='editar_paciente'),
 ]
