@@ -1,5 +1,5 @@
 from django.shortcuts import render
-#teste
+
 PACIENTES = [
     {
         'id': 1,
