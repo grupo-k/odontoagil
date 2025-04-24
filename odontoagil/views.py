@@ -31,3 +31,9 @@ def listar_paciente(request):
         'pacientes': PACIENTES
     }
     return render(request, 'pacientes/listar_paciente.html', context)
+
+def historia_clinica(request):
+    context = {
+        'historia clinica': HISTORIACLINICA
+    }
+    return render(request, 'historia_clinica/historia_clinica.html', context)

@@ -26,4 +26,5 @@ urlpatterns = [
     path('', index, name='cadastrar_paciente'),
     path('pacientes/<int:id>', index, name='remover_paciente'),
     path('pacientes/<int:id>', index, name='editar_paciente'),
+    path('historia_clinica/', historia_clinica, name='historia_clinica'),
 ]
