@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 PACIENTES = [
     {
@@ -33,7 +33,8 @@ def listar_paciente(request):
     return render(request, 'pacientes/listar_paciente.html', context)
 
 def historia_clinica(request):
-    context = {
-        'historia clinica': HISTORIACLINICA
-    }
-    return render(request, 'historia_clinica/historia_clinica.html', context)
+    return render(request, 'historia_clinica/historia_clinica.html')
+
+
+
+
