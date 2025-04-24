@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 
+# Dados dos pacientes
 PACIENTES = [
     {
         'id': 1,
@@ -23,6 +24,26 @@ PACIENTES = [
     },
 ]
 
+# Histórias clínicas associadas aos pacientes
+HISTORIAS_CLINICAS = [
+    {
+        'paciente_id': 1,
+        'data_consulta': '2025-04-10',
+        'motivo': 'Dor de dente constante no lado inferior esquerdo.',
+        'diagnostico': 'Cárie em estágio avançado no molar 36.',
+        'tratamento': 'Remoção da cárie e restauração com resina composta.',
+        'recomendacoes': 'Retorno em 6 meses e higiene bucal com fio dental.'
+    },
+    {
+        'paciente_id': 2,
+        'data_consulta': '2025-04-12',
+        'motivo': 'Avaliação de rotina e limpeza.',
+        'diagnostico': 'Tártaro na região inferior anterior.',
+        'tratamento': 'Profilaxia com ultrassom e aplicação de flúor.',
+        'recomendacoes': 'Escovar os dentes 3x ao dia e retornar em 6 meses.'
+    },
+]
+
 def index(request):
     return render(request, 'index.html')
 
@@ -33,8 +54,16 @@ def listar_paciente(request):
     return render(request, 'pacientes/listar_paciente.html', context)
 
 def historia_clinica(request):
-    return render(request, 'historia_clinica/historia_clinica.html')
+    pacientes_com_historia = []
 
+    for paciente in PACIENTES:
+        historia = next((h for h in HISTORIAS_CLINICAS if h['paciente_id'] == paciente['id']), None)
+        if historia:
+            paciente_copy = paciente.copy()
+            paciente_copy.update(historia)
+            pacientes_com_historia.append(paciente_copy)
 
-
-
+    context = {
+        'pacientes': pacientes_com_historia
+    }
+    return render(request, 'historia_clinica/historia_clinica.html', context)
