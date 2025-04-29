@@ -47,11 +47,66 @@ HISTORIAS_CLINICAS = [
 def index(request):
     return render(request, 'index.html')
 
+# PACIENTES
+
+# Listar Pacientes
+
 def listar_paciente(request):
     context = {
         'pacientes': PACIENTES
     }
     return render(request, 'pacientes/listar_paciente.html', context)
+
+# Cadastrar Paciente
+
+def cadastrar_paciente(request):
+    if request.method == 'POST':
+        nome_completo = request.POST.get('nome_completo')
+        telefone = request.POST.get('telefone')
+        email = request.POST.get('email')
+        idade = request.POST.get('idade')
+        sexo = request.POST.get('sexo')
+        data_nascimento = request.POST.get('data_nascimento')
+        cpf = request.POST.get('cpf')
+
+        estado_civil = request.POST.get('estado_civil', '')
+        rg = request.POST.get('rg', '')
+        cidade = request.POST.get('cidade', '')
+        estado = request.POST.get('estado', '')
+        profissao = request.POST.get('profissao', '')
+        nome_mae = request.POST.get('nome_mae', '')
+        nome_pai = request.POST.get('nome_pai', '')
+        nome_contato_familiar = request.POST.get('nome_contato_familiar', '')
+        grau_parentesco = request.POST.get('grau_parentesco', '')
+        telefone_contato_familiar = request.POST.get('telefone_contato_familiar', '')
+
+        novo_paciente = {
+            'id': len(PACIENTES) + 1,
+            'nome_completo': nome_completo,
+            'telefone': telefone,
+            'email': email,
+            'idade': idade,
+            'sexo': sexo,
+            'data_nascimento': data_nascimento,
+            'cpf': cpf,
+            'estado_civil': estado_civil,
+            'rg': rg,
+            'cidade': cidade,
+            'estado': estado,
+            'profissao': profissao,
+            'nome_mae': nome_mae,
+            'nome_pai': nome_pai,
+            'nome_contato_familiar': nome_contato_familiar,
+            'grau_parentesco': grau_parentesco,
+            'telefone_contato_familiar': telefone_contato_familiar
+        }
+
+        PACIENTES.append(novo_paciente)
+        return redirect('listar_paciente')
+
+    return render(request, 'pacientes/cadastrar_paciente.html')
+
+# HISTÓRIA CLÍNICA
 
 def historia_clinica(request):
     pacientes_com_historia = []
