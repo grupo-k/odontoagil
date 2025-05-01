@@ -106,6 +106,13 @@ def cadastrar_paciente(request):
 
     return render(request, 'pacientes/cadastrar_paciente.html')
 
+## Remover Paciente
+
+def remover_paciente(request, id):
+    global PACIENTES
+    PACIENTES = [p for p in PACIENTES if p['id'] != id]
+    return redirect('listar_paciente')
+
 # HISTÓRIA CLÍNICA
 
 def historia_clinica(request):
