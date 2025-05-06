@@ -113,6 +113,37 @@ def remover_paciente(request, id):
     PACIENTES = [p for p in PACIENTES if p['id'] != id]
     return redirect('listar_paciente')
 
+## Editar Paciente
+
+def editar_paciente(request, id):
+    paciente = next((p for p in PACIENTES if p['id'] == id), None)
+
+    if paciente is None:
+        return redirect('listar_paciente')  
+    
+    if request.method == 'POST':
+        paciente['nome_completo'] = request.POST.get('nome_completo')
+        paciente['telefone'] = request.POST.get('telefone')
+        paciente['email'] = request.POST.get('email')
+        paciente['idade'] = int(request.POST.get('idade'))
+        paciente['sexo'] = request.POST.get('sexo')
+        paciente['data_nascimento'] = request.POST.get('data_nascimento')
+        paciente['cpf'] = request.POST.get('cpf')
+        paciente['estado_civil'] = request.POST.get('estado_civil')
+        paciente['rg'] = request.POST.get('rg')
+        paciente['cidade'] = request.POST.get('cidade')
+        paciente['estado'] = request.POST.get('estado')
+        paciente['profissao'] = request.POST.get('profissao')
+        paciente['nome_mae'] = request.POST.get('nome_mae')
+        paciente['nome_pai'] = request.POST.get('nome_pai')
+        paciente['nome_contato_familiar'] = request.POST.get('nome_contato_familiar')
+        paciente['grau_parentesco'] = request.POST.get('grau_parentesco')
+        paciente['telefone_contato_familiar'] = request.POST.get('telefone_contato_familiar')
+
+        return redirect('listar_paciente')
+
+    return render(request, 'pacientes/editar_paciente.html', {'paciente': paciente})
+
 # HISTÓRIA CLÍNICA
 
 def historia_clinica(request):
