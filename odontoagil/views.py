@@ -10,7 +10,17 @@ PACIENTES = [
         'idade': 30,
         'sexo': 'Feminino',
         'data_nascimento': '1994-03-20',
-        'cpf': '123.456.789-00'
+        'cpf': '123.456.789-00',
+        'estado_civil': 'Solteira',
+        'rg': '12.345.678-9',
+        'cidade': 'São Paulo',
+        'estado': 'SP',
+        'profissao': 'Dentista',
+        'nome_mae': 'Maria Coan',
+        'nome_pai': 'João Coan',
+        'nome_contato_familiar': 'Pedro Coan',
+        'grau_parentesco': 'Irmão',
+        'telefone_contato_familiar': '(11) 23456-7890'
     },
     {
         'id': 2,
@@ -20,7 +30,17 @@ PACIENTES = [
         'idade': 45,
         'sexo': 'Masculino',
         'data_nascimento': '1980-10-15',
-        'cpf': '987.654.321-00'
+        'cpf': '987.654.321-00',
+        'estado_civil': 'Casado',
+        'rg': '98.765.432-1',
+        'cidade': 'São Paulo',
+        'estado': 'SP',
+        'profissao': 'Engenheiro',
+        'nome_mae': 'Ana Silva',
+        'nome_pai': 'Carlos Silva',
+        'nome_contato_familiar': 'Paulo Silva',
+        'grau_parentesco': 'Filho',
+        'telefone_contato_familiar': '(11) 98765-4322'
     },
 ]
 
@@ -143,6 +163,20 @@ def editar_paciente(request, id):
         return redirect('listar_paciente')
 
     return render(request, 'pacientes/editar_paciente.html', {'paciente': paciente})
+
+## Detalhes Paciente
+
+def detalhes_paciente(request, id):
+    paciente = next((p for p in PACIENTES if p['id'] == id), None)
+    
+    if paciente is None:
+        return redirect('listar_paciente')  
+
+    context = {
+        'paciente': paciente
+    }
+
+    return render(request, 'pacientes/detalhes_paciente.html', context)
 
 # HISTÓRIA CLÍNICA
 
