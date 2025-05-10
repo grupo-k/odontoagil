@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/procedimentos/procedimentos.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h1>Procedimentos e Preços</h1>
+    <a href="#" class="btn-novo">Adicionar Procedimento</a>
+</div>
+
+{% if procedimentos %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th class="acao-col">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in procedimentos %}
+        <tr>
+            <td>{{ p.nome }}</td>
+            <td>{{ p.descricao }}</td>
+            <td>R$ {{ p.preco|floatformat:2 }}</td>
+            <td class="acao-col">
+                <a href="#" class="btn-editar">Editar</a>
+                <a href="#" class="btn-remover" onclick="return confirm('Deseja remover este procedimento?')">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Nenhum procedimento registrado.</p>
+{% endif %}
+{% endblock %}

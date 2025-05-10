@@ -64,6 +64,44 @@ HISTORIAS_CLINICAS = [
     },
 ]
 
+# Dados simulados de tratamentos
+TRATAMENTOS = [
+    {
+        'id': 1,
+        'paciente_id': 1,
+        'descricao': 'Canal no molar inferior esquerdo',
+        'data': '2025-05-01',
+    },
+    {
+        'id': 2,
+        'paciente_id': 2,
+        'descricao': 'Extração de siso',
+        'data': '2025-04-28',
+    },
+]
+
+# Dados simulados de procedimentos e preços
+PROCEDIMENTOS = [
+    {
+        'id': 1,
+        'nome': 'Restauração',
+        'descricao': 'Tratamento de cáries com resina composta.',
+        'preco': 250.00,
+    },
+    {
+        'id': 2,
+        'nome': 'Limpeza',
+        'descricao': 'Limpeza profissional dos dentes com ultrassom.',
+        'preco': 120.00,
+    },
+    {
+        'id': 3,
+        'nome': 'Extração de dente',
+        'descricao': 'Extração simples de dente.',
+        'preco': 300.00,
+    },
+]
+
 def index(request):
     return render(request, 'index.html')
 
@@ -194,3 +232,20 @@ def historia_clinica(request):
         'pacientes': pacientes_com_historia
     }
     return render(request, 'historia_clinica/historia_clinica.html', context)
+
+def tratamentos(request):
+    tratamentos_com_pacientes = []
+    for t in TRATAMENTOS:
+        paciente = next((p for p in PACIENTES if p['id'] == t['paciente_id']), None)
+        if paciente:
+            tratamento = t.copy()
+            tratamento['paciente_nome'] = paciente['nome_completo']
+            tratamentos_com_pacientes.append(tratamento)
+
+    return render(request, 'tratamentos/tratamentos.html', {'tratamentos': tratamentos_com_pacientes})
+
+def listar_procedimentos(request):
+    context = {
+        'procedimentos': PROCEDIMENTOS
+    }
+    return render(request, 'procedimentos/listar_procedimentos.html', context)
