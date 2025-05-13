@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/serviços/editar_serviços.css' %}">
+<link rel="stylesheet" href="{% static 'css/servicos/editar_servicos.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -58,15 +58,15 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="observaçoes">
-                    <label for="observaçoes">observaçoes:</label>
-                    <input type="text" name="observaçoes" id="observaçoes" class="input" required value="{{ servicos.observacoes }}">
+                <div class="observacoes">
+                    <label for="observacoes">observacoes:</label>
+                    <input type="text" name="observacoes" id="observacoes" class="input" required value="{{ servicos.observacoes }}">
                 </div>
             </div>
         </section>
 
     
 
-        <button type="submit" class="btn-enviar">Salvar Alterações</button>
+        <button type="submit" class="btn-enviar">Salvar Alteracoes</button>
     </form>
 {% endblock %}
