@@ -102,6 +102,32 @@ PROCEDIMENTOS = [
     },
 ]
 
+# Dados dos serviços
+SERVICOS = [
+    {
+        'id': 1,
+        'data de inclusão': '18 maio 2025',
+        'codigo do servico': 'cod01',
+        'material usado': 'Bicarbonato, extratores de tártaro, curetas e ultrassom odontológico e flúor2.',
+        'descrição do servico 01': 'Limpeza Dental - Remoção de placa bacteriana, tártaro e manchas dos dentes.',
+        'codigo do servico secundario': 'cod02',
+        'descrição do servico secundário:': 'Polimento e aplicação de flúor2.',
+        'aparelhos de apoio:': 'Jatos de bicarbonato.',
+        'Observacoes': 'Essa limpeza visa prevenir problemas como cárie, placa bacteriana e gengivite.',
+        },
+    {
+        'id': 2,
+        'data de inclusão': '18 maio 2025',
+        'codigo do servico': 'cod01',
+        'material usado': 'Bicarbonato, extratores de tártaro, curetas e ultrassom odontológico e flúor2.',
+        'descricao do servico 01': 'Limpeza Dental - Remoção de placa bacteriana, tártaro e manchas dos dentes.',
+        'codigo do servico secundario': 'cod02',
+        'descricao do servico secundário:': 'Polimento e aplicação de flúor2.',
+        'aparelhos de apoio:': 'Jatos de bicarbonato.',
+        'Observacoes': 'Essa limpeza visa prevenir problemas como cárie, placa bacteriana e gengivite.',
+    },
+]
+
 def index(request):
     return render(request, 'index.html')
 
@@ -249,3 +275,84 @@ def listar_procedimentos(request):
         'procedimentos': PROCEDIMENTOS
     }
     return render(request, 'procedimentos/listar_procedimentos.html', context)
+
+# SERVIÇOS
+
+# Listar Serviços
+
+def listar_servicos(request):
+    context = {
+        'servicos': SERVICOS
+    }
+    return render(request, 'servicos/listar_servicos.html', context)
+
+# Cadastrar Serviços
+
+def cadastrar_servicos(request):
+    if request.method == 'POST':
+        data_inclusao = request.POST.get('data_inclusao')
+        codigo_servicos = request.POST.get('codigo_servicos')
+        material_usado = request.POST.get('material_usado')
+        descricao_servicos = request.POST.get('descricao_servvicos')
+        codigo_servicos_secundario = request.POST.get('codigo_serviços_secundario')
+        descricao_servicos_secundario = request.POST.get('descricao_servicos_secundario')
+        aparelho_apoio = request.POST.get('aparelho_apoio')
+        observacoes = request.POST.get('observacoes')
+
+        novo_servicos = {
+            'id': len(SERVICOS) + 1,
+            'data_inclusao': data_inclusao,
+            'codigo_servicos': codigo_servicos,
+            'material_usado' : material_usado,
+            'descricao_servicos' : descriçao_servvicos,
+            'codigo_servicos_secundario' : codigo_servicos_secundario,
+            'descricao_servicos_secundario' : descricao_servicos_secundario,
+            'aparelho_apoio' : aparelho_apoio,
+            'observacoes' : observacoes,
+            }
+
+        SERVICOS.append(novo_servicos)
+        return redirect('listar_servicos')
+
+    return render(request, 'servicos/cadastrar_servicos.html')
+
+## Remover Serviços
+
+def remover_servicos(request, id):
+    global SERVICOS
+    SERVICOS = [s for s in SERVICOS if s['id'] != id]
+    return redirect('listar_servicos')
+
+## Editar Serviços
+def editar_servicos(request, id):
+    servicos = next((s for s in SERVICOS if s['id'] == id), None)
+
+    if servicos is None:
+        return redirect('listar_servicos')  
+    
+    if request.method == 'POST':
+        servico['data_inclusao'] = request.POST.get('data_inclusao')
+        servico['codigo_servicos'] = request.POST.get('codigo_servicos')
+        servico['material_usado'] = request.POST.get('material_usado')
+        servico['descriçao_servicos'] = request.POST.get('descriçao_servvicos')
+        servico['codigo_servicos_secundario'] = request.POST.get('codigo_servicos_secundario')
+        servico['descriçao_servicos_secundario'] = request.POST.get('descricao_servicos_secundario')
+        servico['aparelho_apoio'] = request.POST.get('aparelho_apoio')
+        servico['observacoes'] = request.POST.get('observacoes')
+        return redirect('listar_servicos')
+
+    return render(request, 'servicos/editar_servicos.html', {'servicos': servicos})
+
+## Detalhes Serviços
+
+def detalhes_servicos(request, id):
+    servicos = next((s for s in SERVICOS if s['id'] == id), None)
+    
+    if servicos is None:
+        return redirect('listar_servicos')  
+
+    context = {
+        'servicos': servicos
+    }
+
+    return render(request, 'servicos/detalhes_serviços.html', context)

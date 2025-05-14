@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 
 from .views import historia_clinica, index, listar_paciente, cadastrar_paciente, listar_procedimentos, remover_paciente, editar_paciente, detalhes_paciente, tratamentos
+from .views import listar_servicos, cadastrar_servicos, remover_servicos, editar_servicos, detalhes_servicos
 from odontoagil import views
 
 urlpatterns = [
@@ -31,5 +32,10 @@ urlpatterns = [
     path('historia_clinica/', historia_clinica, name='historia_clinica'),
     path('tratamentos/', tratamentos, name='tratamentos'),
     path('procedimentos/', listar_procedimentos, name='listar_procedimentos'),
+    path('servicos/', listar_servicos, name='listar_servicos'),
+    path('servicos/cadastrar/', cadastrar_servicos, name='cadastrar_servicos'),
+    path('servicos/remover/<int:id>/', remover_servicos, name='remover_servicos'),
+    path('servicos/editar/<int:id>/', editar_servicos, name='editar_servicos'),
+    path('servicos/detalhes/<int:id>', detalhes_servicos, name='detalhes_servicos'),
 
 ]
