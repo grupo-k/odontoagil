@@ -355,4 +355,4 @@ def detalhes_servicos(request, id):
         'servicos': servicos
     }
 
-    return render(request, 'servicos/detalhes_serviços.html', context)
+    return render(request, 'servicos/detalhes_servicos.html', context)

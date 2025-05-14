@@ -67,7 +67,7 @@
     overflow-x: auto;
 }
 
-.tabela-serviços {
+.tabela-servicos {
     width: 100%;
     min-width: 720px;
     border-collapse: collapse;
@@ -78,20 +78,20 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.tabela-serviços thead {
+.tabela-servicos thead {
     background-color: var(--primary-color);
     color: #fff;
     text-align: left;
 }
 
-.tabela-serviços th,
-.tabela-serviços td {
+.tabela-servicos th,
+.tabela-servicos td {
     padding: 1rem;
     border-bottom: 1px solid #e0e0e0;
     vertical-align: middle;
 }
 
-.tabela-serviços tbody tr:hover {
+.tabela-servicos tbody tr:hover {
     background-color: #f9f9f9;
 }
 
