@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .views import historia_clinica, index, listar_paciente, cadastrar_paciente, listar_procedimentos, remover_paciente, editar_paciente, detalhes_paciente, tratamentos
+from .views import historia_clinica, index, listar_paciente, cadastrar_paciente, listar_procedimentos, remover_paciente, editar_paciente, detalhes_paciente, listar_usuarios
 from .views import listar_servicos, cadastrar_servicos, remover_servicos, editar_servicos, detalhes_servicos
 from odontoagil import views
 
