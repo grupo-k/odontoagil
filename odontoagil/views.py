@@ -128,6 +128,23 @@ SERVICOS = [
     },
 ]
 
+USUARIOS = [
+    {
+        'id': 1,
+        'nome_completo': 'João Admin',
+        'email': 'joao.admin@exemplo.com',
+        'telefone': '(11) 99999-1234',
+        'cpf': '111.222.333-44',
+    },
+    {
+        'id': 2,
+        'nome_completo': 'Maria Secretaria',
+        'email': 'maria.secretaria@exemplo.com',
+        'telefone': '(11) 98888-5678',
+        'cpf': '555.666.777-88',
+    },
+]
+
 def index(request):
     return render(request, 'index.html')
 
@@ -356,3 +373,10 @@ def detalhes_servicos(request, id):
     }
 
     return render(request, 'servicos/detalhes_servicos.html', context)
+
+# LISTAR USUÁRIOS
+def listar_usuarios(request):
+    context = {
+        'usuarios': USUARIOS
+    }
+    return render(request, 'usuarios/listar_usuarios.html', context)
