@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/usuarios/listar_usuarios.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="cabecalho-conteudo">
+        <h1 class="titulo-pagina">Usuários</h1>
+        <a href="{% url 'cadastrar_usuario' %}" class="botao botao-principal">Cadastrar Novo Usuário</a>
+    </header>
+
+    {% if usuarios %}
+        <div class="tabela-responsiva">
+            <table class="tabela-usuarios">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Usuário</th>
+                        <th>Email</th>
+                        <th>Tipo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.nome_completo }}</td>
+                        <td>{{ usuario.username }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ usuario.tipo }}</td>
+                        <td>
+                            <a href="{% url 'editar_usuario' usuario.id %}" class="botao botao-editar">Editar</a>
+                            <a href="{% url 'remover_usuario' usuario.id %}" class="botao botao-remover" onclick="return confirm('Tem certeza que deseja remover este usuário?')">Remover</a>
+                            <a href="{% url 'detalhes_usuario' usuario.id %}" class="botao botao-detalhes">Detalhes</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="mensagem-vazia">Nenhum usuário cadastrado.</p>
+    {% endif %}
+{% endblock %}
