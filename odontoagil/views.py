@@ -106,25 +106,25 @@ PROCEDIMENTOS = [
 SERVICOS = [
     {
         'id': 1,
-        'data de inclusão': '18 maio 2025',
-        'codigo do servico': 'cod01',
-        'material usado': 'Bicarbonato, extratores de tártaro, curetas e ultrassom odontológico e flúor2.',
-        'descrição do servico 01': 'Limpeza Dental - Remoção de placa bacteriana, tártaro e manchas dos dentes.',
-        'codigo do servico secundario': 'cod02',
-        'descrição do servico secundário:': 'Polimento e aplicação de flúor2.',
-        'aparelhos de apoio:': 'Jatos de bicarbonato.',
+        'data_inclusao': '18/05/2025',
+        'codigo_servicos': 'cod01',
+        'material_usado': 'Bicarbonato, extratores de tártaro, curetas e ultrassom odontológico e flúor2.',
+        'descricao_servicos': 'Limpeza Dental - Remoção de placa bacteriana, tártaro e manchas dos dentes.',
+        'codigo_servicos_secundario': 'cod02',
+        'descricao_servicos_secundario': 'Polimento e aplicação de flúor2.',
+        'aparelho_apoio': 'Jatos de bicarbonato.',
         'Observacoes': 'Essa limpeza visa prevenir problemas como cárie, placa bacteriana e gengivite.',
         },
     {
         'id': 2,
-        'data de inclusão': '18 maio 2025',
-        'codigo do servico': 'cod01',
-        'material usado': 'Bicarbonato, extratores de tártaro, curetas e ultrassom odontológico e flúor2.',
-        'descricao do servico 01': 'Limpeza Dental - Remoção de placa bacteriana, tártaro e manchas dos dentes.',
-        'codigo do servico secundario': 'cod02',
-        'descricao do servico secundário:': 'Polimento e aplicação de flúor2.',
-        'aparelhos de apoio:': 'Jatos de bicarbonato.',
-        'Observacoes': 'Essa limpeza visa prevenir problemas como cárie, placa bacteriana e gengivite.',
+        'data_inclusao': '18 maio 2025',
+        'codigo_servicos': 'cod03',
+        'material_usado': 'Bicarbonato, extratores de tártaro, curetas e ultrassom odontológico e flúor2.',
+        'descricao_servicos': 'Limpeza Dental - Remoção de placa bacteriana, tártaro e manchas dos dentes.',
+        'codigo_servicos_secundario': 'cod04',
+        'descricao_servicos_secundário': 'Polimento e aplicação de flúor2.',
+        'aparelho_apoio': 'Jatos de bicarbonato.',
+        'observacoes': 'Essa limpeza visa prevenir problemas como cárie, placa bacteriana e gengivite.',
     },
 ]
 
@@ -311,7 +311,7 @@ def cadastrar_servicos(request):
         codigo_servicos = request.POST.get('codigo_servicos')
         material_usado = request.POST.get('material_usado')
         descricao_servicos = request.POST.get('descricao_servvicos')
-        codigo_servicos_secundario = request.POST.get('codigo_serviços_secundario')
+        codigo_servicos_secundario = request.POST.get('codigo_servicos_secundario')
         descricao_servicos_secundario = request.POST.get('descricao_servicos_secundario')
         aparelho_apoio = request.POST.get('aparelho_apoio')
         observacoes = request.POST.get('observacoes')
@@ -321,7 +321,7 @@ def cadastrar_servicos(request):
             'data_inclusao': data_inclusao,
             'codigo_servicos': codigo_servicos,
             'material_usado' : material_usado,
-            'descricao_servicos' : descriçao_servvicos,
+            'descricao_servicos' : descricao_servvicos,
             'codigo_servicos_secundario' : codigo_servicos_secundario,
             'descricao_servicos_secundario' : descricao_servicos_secundario,
             'aparelho_apoio' : aparelho_apoio,
@@ -351,9 +351,9 @@ def editar_servicos(request, id):
         servico['data_inclusao'] = request.POST.get('data_inclusao')
         servico['codigo_servicos'] = request.POST.get('codigo_servicos')
         servico['material_usado'] = request.POST.get('material_usado')
-        servico['descriçao_servicos'] = request.POST.get('descriçao_servvicos')
+        servico['descricao_servicos'] = request.POST.get('descricao_servicos')
         servico['codigo_servicos_secundario'] = request.POST.get('codigo_servicos_secundario')
-        servico['descriçao_servicos_secundario'] = request.POST.get('descricao_servicos_secundario')
+        servico['descricao_servicos_secundario'] = request.POST.get('descricao_servicos_secundario')
         servico['aparelho_apoio'] = request.POST.get('aparelho_apoio')
         servico['observacoes'] = request.POST.get('observacoes')
         return redirect('listar_servicos')
