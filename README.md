@@ -10,6 +10,31 @@ Desenvolvimento do projeto OdontoÁgil do TADS da UDESC
 - Michel Luiz Ayres Pontes Junior  
 - Pablo Idalgo Gonzelez
 
+🦷 Sistema de Gerenciamento de Consultório Odontológico
+Este é um sistema web desenvolvido com Django com o objetivo de auxiliar consultórios odontológicos no gerenciamento de pacientes, tratamentos e atendimentos clínicos. O sistema visa otimizar o fluxo de trabalho dos profissionais da área odontológica, oferecendo uma interface intuitiva e segura para a administração de dados dos pacientes.
+
+🎯 Funcionalidades
+Cadastro, edição e exclusão de pacientes
+
+Registro e acompanhamento de tratamentos odontológicos
+
+Histórico de atendimentos por paciente
+
+Área administrativa com autenticação de usuários
+
+Relatórios básicos de atendimentos e pacientes
+
+🛠️ Tecnologias Utilizadas
+Python 3
+
+Django Framework
+
+HTML, CSS, JavaScript (Django Templates)
+
+
+🚀 Objetivo Acadêmico
+Este projeto foi desenvolvido como parte de um trabalho do Projeto Integrador com o intuito de aplicar conhecimentos de desenvolvimento web com Django em um cenário realista, além de promover boas práticas de programação.
+
 ---
 
 ## 🚨 Arquivos Importantes
