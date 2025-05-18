@@ -34,16 +34,6 @@ Relatórios básicos de atendimentos e pacientes
 
 
 
-🛠️ Tecnologias Utilizadas:
-
-Python 3
-
-Django Framework
-
-HTML, CSS, JavaScript (Django Templates)
-
-
-
 🚀 Objetivo Acadêmico
 
 Este projeto foi desenvolvido como parte de um trabalho do Projeto Integrador com o intuito de aplicar conhecimentos de desenvolvimento web com Django em um cenário realista, além de promover boas práticas de programação.
