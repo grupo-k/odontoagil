@@ -8,7 +8,7 @@ Desenvolvimento do projeto OdontoÁgil do TADS da UDESC
 - Ana Laura Coan  
 - Carlos Alberto Zapelini Farias  
 - Michel Luiz Ayres Pontes Junior  
-- Pablo Idalgo Gonzelez
+- Pablo Idalgo Gonzalez
 
 ---
 
