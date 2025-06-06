@@ -1,6 +1,9 @@
 #
 from django.urls import path, include
 
+from . import views
+from .views import cadastrar_servicos
+
 from .views import historia_clinica, index, listar_paciente, cadastrar_paciente, listar_procedimentos, remover_paciente, editar_paciente, detalhes_paciente, listar_usuarios
 from .views import listar_servicos, cadastrar_servicos, remover_servicos, editar_servicos, detalhes_servicos
 from odontoagil import views
@@ -19,4 +22,6 @@ urlpatterns = [
     path('servicos/editar/<int:id>/', editar_servicos, name='editar_servicos'),
     path('servicos/detalhes/<int:id>', detalhes_servicos, name='detalhes_servicos'),
     path('usuarios/', listar_usuarios, name='listar_usuarios'),
+   # path('servicos/cadastrar_servicos/', views.cadastrar_servicos, name='cadastrar_servicos'),
+    path('servicos/cadastrar/', cadastrar_servicos, name='cadastrar_servicos'),
 ]

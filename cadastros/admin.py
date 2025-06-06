@@ -5,7 +5,8 @@ from .models import Servico, CodigoServ, CodigoServicosSecundario
 class ServicoAdmin(admin.ModelAdmin):
     list_display = ('codigo_servicos', 'descricao_servicos', 'data_inclusao', 'material_usado', 'aparelho_apoio')
     search_fields = ('codigo_servicos', 'descricao_servicos', 'material_usado')
-    list_filter = ('data_inclusao',)
+    list_filter = ('data_inclusao','codigo_servicos',)
+    ordering = ['data_inclusao','codigo_servicos',]
     actions_on_bottom = True
     actions_on_top = False
 

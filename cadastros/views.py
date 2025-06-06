@@ -1,4 +1,9 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render, redirect
+
+from .forms import ServicoForm
+
+from .forms import Servico
+
 
 # Dados dos pacientes
 PACIENTES = [
@@ -383,3 +388,14 @@ def listar_usuarios(request):
 
 
 # Create your views here.
+
+def cadastrar_servicos(request):
+    if request.method == 'POST':
+        form = ServicoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_servicos')
+    else:
+        form = ServicoForm()
+    
+    return render(request, 'cadastros/cadastrar_servicos.html', {'form': form})
