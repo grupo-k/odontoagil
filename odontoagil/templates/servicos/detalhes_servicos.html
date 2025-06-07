@@ -6,17 +6,17 @@
 {% endblock %}
 
 {% block content %}
-<h2>Detalhes do Servicos</h2>
+<h2>Detalhes do Serviço</h2>
 
 <div class="detalhes-servicos">
-    <p><strong>Data Inclusao:</strong> {{ servicos.data_inclusao }}</p>
-    <p><strong>Codigo Servico:</strong> {{ servicos.codigo_servico }}</p>
-    <p><strong>Material Usado:</strong> {{ servicos.material_usado }}</p>
-    <p><strong>Descricao Servico:</strong> {{ servicos.descricao_servicos }}</p>
-    <p><strong>Codigo Servico Secundario:</strong> {{ servicos.codigo_servico_secundario }}</p>
-    <p><strong>Descricao Servico Secundario:</strong> {{ servicos.descricao_servicos_secundario }}</p>
-    <p><strong>Aparelhos Apoio:</strong> {{ servicos.aparelhos_apoio }}</p>
-    <p><strong>Observacoes:</strong> {{ servicos.observacoes }}</p>
+    <p><strong>Data de Inclusão:</strong> {{ servico.data_inclusao }}</p>
+<p><strong>Código do Serviço:</strong> {{ servico.codigo_servicos }}</p>
+<p><strong>Material Usado:</strong> {{ servico.material_usado }}</p>
+<p><strong>Descrição do Serviço:</strong> {{ servico.descricao_servicos }}</p>
+<p><strong>Código do Serviço Secundário:</strong> {{ servico.codigo_servicos_secundario }}</p>
+<p><strong>Descrição do Serviço Secundário:</strong> {{ servico.descricao_servicos_secundario }}</p>
+<p><strong>Aparelho de Apoio:</strong> {{ servico.aparelho_apoio }}</p>
+<p><strong>Observações:</strong> {{ servico.observacoes }}</p>
 </div>
 
 <a href="{% url 'listar_servicos' %}" class="botao-voltar">Voltar</a>

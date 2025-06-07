@@ -6,69 +6,66 @@
 {% endblock %}
 
 {% block content %}
-    <header class="cabecalho-conteudo">
-        <h1 class="titulo-pagina">Cadastrar Serviços</h1>
-    </header>
+<header class="cabecalho-conteudo">
+    <h1 class="titulo-pagina">Cadastrar Serviços</h1>
+    <a href="{% url 'listar_servicos' %}" class="botao botao-voltar">Voltar</a>
+</header>
 
-    <form method="POST">
-        {% csrf_token %}
+<form method="POST" class="formulario">
+    {% csrf_token %}
 
-        <section class="Cadastro de Servicos Prestados">
-            <h2>Informações do Tratamento</h2>
-            <div class="form-row">
-                <div class="campo-formulario">
-                    <label for="data_incllusao">Data Inclusao:</label>
-                    <input type="date" name="data_inclusao" id="data_inclusao" class="input" required>
-                </div>
+    <section class="cadastro-servicos">
+        <h2>Informações do Serviço</h2>
 
-                <div class="campo-formulario">
-                    <label for="codigo_servicos">Codigo de Servicos:</label>
-                    <input type="text" name="codigo_servicos" id="codigo_servicos" class="input" required>
-                </div>
-            </div>
-
-            <div class="form-row">
+        <div class="form-row">
             <div class="campo-formulario">
-                <div class="campo-formulario">
-                    <label for="material_usado">Material usado:</label>
-                    <input type="text" name="material_usado" id="material_usado" class="input" required>
-                </div>
-
-                <div class="campo-formulario">
-                    <label for="descricao_servicos">descricao_servicos:</label>
-                    <input type="text" name="descricao_servicos" id="idade" class="input" required>
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="campo-formulario">
-                    <label for="codigo_servicos_secundarios">Codigo servicos secundarios:</label>
-                    <input type="text"  name="codigo_servicos_secundarios" id="codigos_servicos_secundarios" class="input" required>
-                </div>
+                <label for="data_inclusao">Data de Inclusão:</label>
+                <input type="date" name="data_inclusao" id="data_inclusao" required>
             </div>
 
             <div class="campo-formulario">
-                <div class="campo-formulario">
-                    <label for="descricao_servicos_secundarios">descricao serviços secundarios:</label>
-                    <input type="text" name="descricao_servicos_secundarios" id="descricao_servicos_secundarios" class="input" required>
-                </div>
+                <label for="codigo_servicos">Código do Serviço:</label>
+                <input type="text" name="codigo_servicos" id="codigo_servicos" required>
             </div>
-            <div class="form-row">
-                <div class="campo-formulario">
-                    <label for="aparelho_apoio">aprelho_apoio:</label>
-                    <input type="text" name="aparelho_apoio" id="aparelho_apoio" class="input" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="observacoes">
-                    <label for="observacoes">Observaçoes:</label>
-                    <input type="text" name="observacoes" id="observacoes" class="input" required>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        
+        <div class="form-row">
+            <div class="campo-formulario">
+                <label for="material_usado">Material Usado:</label>
+                <input type="text" name="material_usado" id="material_usado">
+            </div>
 
-        <button type="submit" class="btn-enviar">Cadastrar Servicos</button>
-    </form>
+            <div class="campo-formulario">
+                <label for="descricao_servicos">Descrição do Serviço:</label>
+                <input type="text" name="descricao_servicos" id="descricao_servicos">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="campo-formulario">
+                <label for="codigo_servicos_secundario">Código Secundário:</label>
+                <input type="text" name="codigo_servicos_secundario" id="codigo_servicos_secundario">
+            </div>
+
+            <div class="campo-formulario">
+                <label for="descricao_servicos_secundario">Descrição Secundária:</label>
+                <input type="text" name="descricao_servicos_secundario" id="descricao_servicos_secundario">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="campo-formulario">
+                <label for="aparelho_apoio">Aparelho de Apoio:</label>
+                <input type="text" name="aparelho_apoio" id="aparelho_apoio">
+            </div>
+
+            <div class="campo-formulario">
+                <label for="observacoes">Observações:</label>
+                <textarea name="observacoes" id="observacoes" rows="3"></textarea>
+            </div>
+        </div>
+    </section>
+
+    <button type="submit" class="botao botao-principal">Cadastrar Serviço</button>
+</form>
 {% endblock %}

@@ -150,18 +150,25 @@ def listar_servicos(request):
 
 def cadastrar_servicos(request):
     if request.method == 'POST':
+        codigo_servicos = request.POST.get('codigo_servicos')
+        material_usado = request.POST.get('material_usado')
+        descricao_servicos = request.POST.get('descricao_servicos')
+        codigo_servicos_secundario = request.POST.get('codigo_servicos_secundario')
+        descricao_servicos_secundario = request.POST.get('descricao_servicos_secundario')
+        aparelho_apoio = request.POST.get('aparelho_apoio')
+        observacoes = request.POST.get('observacoes')
+
         servico = Servico(
-            data_inclusao=request.POST.get('data_inclusao'),
-            codigo_servicos=request.POST.get('codigo_servicos'),
-            material_usado=request.POST.get('material_usado'),
-            descricao_servicos=request.POST.get('descricao_servicos'),
-            codigo_servicos_secundario=request.POST.get('codigo_servicos_secundario'),
-            descricao_servicos_secundario=request.POST.get('descricao_servicos_secundario'),
-            aparelho_apoio=request.POST.get('aparelho_apoio'),
-            observacoes=request.POST.get('observacoes')
+            codigo_servicos=codigo_servicos,
+            material_usado=material_usado,
+            descricao_servicos=descricao_servicos,
+            codigo_servicos_secundario=codigo_servicos_secundario,
+            descricao_servicos_secundario=descricao_servicos_secundario,
+            aparelho_apoio=aparelho_apoio,
+            observacoes=observacoes
         )
         servico.save()
-        return redirect('listar_servicos')
+        return redirect('listar_servicos')  # ou outra URL que queira após cadastro
 
     return render(request, 'servicos/cadastrar_servicos.html')
 
@@ -176,7 +183,7 @@ def editar_servicos(request, id):
         servico.save()
         return redirect('listar_servicos')
 
-    return render(request, 'servicos/editar_servicos.html', {'servicos': servico})
+    return render(request, 'servicos/editar_servicos.html', {'servico': servico})
 
 def remover_servicos(request, id):
     servico = get_object_or_404(Servico, id=id)
@@ -185,7 +192,8 @@ def remover_servicos(request, id):
 
 def detalhes_servicos(request, id):
     servico = get_object_or_404(Servico, id=id)
-    return render(request, 'servicos/detalhes_servicos.html', {'servicos': servico})
+    return render(request, 'servicos/detalhes_servicos.html', {'servico': servico})
+
 
 # USUÁRIOS
 

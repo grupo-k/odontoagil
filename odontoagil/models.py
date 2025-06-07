@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 
 class Paciente(models.Model):
@@ -55,12 +56,17 @@ class Procedimento(models.Model):
 
 
 class Servico(models.Model):
-    nome = models.CharField(max_length=200)
-    descricao = models.TextField(blank=True)
-    preco = models.DecimalField(max_digits=8, decimal_places=2)
+    data_inclusao = models.DateField(default=date.today)
+    codigo_servicos = models.CharField(max_length=50, default="sem código")
+    material_usado = models.CharField(max_length=200, default="sem material")
+    descricao_servicos = models.TextField(default="sem descrição")
+    codigo_servicos_secundario = models.CharField(max_length=50, blank=True, null=True)
+    descricao_servicos_secundario = models.TextField(default="sem descrição")
+    aparelho_apoio = models.CharField(max_length=200, default="sem aparelho")
+    observacoes = models.TextField(default="sem observações")
 
     def __str__(self):
-        return self.nome
+        return f"Serviço {self.codigo_servicos} - {self.descricao_servicos}"
 
 
 class Usuario(models.Model):
