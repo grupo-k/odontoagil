@@ -31,14 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'cadastros.apps.CadastrosConfig'   # comentado para evitar erro...
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cadastros'
 ]
 
 MIDDLEWARE = [
@@ -56,7 +54,7 @@ ROOT_URLCONF = 'odontoagil.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':[],
+        'DIRS': [BASE_DIR / 'odontoagil/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,9 +102,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'America/Sao_Paulo'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -117,10 +115,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-#STATICFILES_DIRS = [BASE_DIR / 'odontoagil/static']
-
-MEDIAL_URL ='cadasttros/static'
-MEDIA_ROOT = BASE_DIR / 'cadasttros/static'
+STATICFILES_DIRS = [BASE_DIR / 'odontoagil/static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
