@@ -16,7 +16,7 @@ urlpatterns = [
    # História Clínica
     path('historia_clinica/', views.historia_clinica, name='historia_clinica'),
     path('historia_clinica/cadastrar/<int:paciente_id>/', views.cadastrar_historia_clinica, name='cadastrar_historia_clinica'),  # Nova rota
-    path('historia_clinica/editar/<int:paciente_id>/<str:data_consulta>/', views.editar_historia_clinica, name='editar_historia_clinica'),
+    path('historia_clinica/editar/<int:paciente_id>/<int:historia_id>/', views.editar_historia_clinica, name='editar_historia_clinica'),
     path('historia_clinica/remover/<int:paciente_id>/<int:historia_id>/', views.remover_historia_clinica, name='remover_historia_clinica'),
     path('historia_clinica/detalhes/<int:paciente_id>/<int:historia_id>/', views.detalhes_historia_clinica, name='detalhes_historia_clinica'),
 
