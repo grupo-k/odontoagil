@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pacientes/detalhes_paciente.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Detalhes da História Clínica</h2>
+
+<div class="detalhes-paciente">
+    <p><strong>Paciente:</strong> {{ paciente.nome_completo }}</p>
+    <p><strong>Data da Consulta:</strong> {{ historia.data_criacao|date:"d/m/Y H:i" }}</p>
+    <p><strong>Motivo:</strong> {{ historia.motivo }}</p>
+    <p><strong>Diagnóstico:</strong> {{ historia.diagnostico }}</p>
+    <p><strong>Tratamento:</strong> {{ historia.tratamento }}</p>
+    <p><strong>Recomendações:</strong> {{ historia.recomendacoes }}</p>
+</div>
+
+<a href="{% url 'historia_clinica' %}" class="botao-voltar">Voltar</a>
+{% endblock %}

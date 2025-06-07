@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Editar História Clínica de {{ paciente.nome_completo }} em {{ historia.data_consulta }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <label>Motivo</label><br>
+    <textarea name="motivo" rows="3">{{ historia.motivo }}</textarea><br>
+
+    <label>Diagnóstico</label><br>
+    <textarea name="diagnostico" rows="3">{{ historia.diagnostico }}</textarea><br>
+
+    <label>Tratamento</label><br>
+    <textarea name="tratamento" rows="3">{{ historia.tratamento }}</textarea><br>
+
+    <label>Recomendações</label><br>
+    <textarea name="recomendacoes" rows="3">{{ historia.recomendacoes }}</textarea><br>
+
+    <button type="submit">Salvar</button>
+    <a href="{% url 'historia_clinica' %}">Cancelar</a>
+</form>
+{% endblock %}

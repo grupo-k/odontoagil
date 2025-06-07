@@ -3,48 +3,60 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/historia_clinica/historia_clinica.css' %}">
-<style>
-    .table td.acao-col {
-        min-width: 180px;
-    }
-</style>
 {% endblock %}
 
 {% block content %}
-    <div class="header">
-        <h1>Histórias Clínicas</h1>
-        <a href="{% url 'cadastrar_paciente' %}" class="btn-novo">Cadastrar Novo Paciente</a>
-    </div>
+<header class="cabecalho-conteudo">
+    <h1 class="titulo-pagina">Histórias Clínicas</h1>
+</header>
 
-    {% if pacientes %}
-        <table class="table">
+{% if pacientes %}
+    <div class="tabela-responsiva">
+        <table class="tabela-pacientes">
             <thead>
                 <tr>
-                    <th>Nome</th>
+                    <th>Nome do Paciente</th>
+                    <th>Data da Consulta</th>
                     <th>Motivo</th>
                     <th>Diagnóstico</th>
                     <th>Tratamento</th>
                     <th>Recomendações</th>
-                    <th class="acao-col">Ações</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 {% for paciente in pacientes %}
-                <tr>
-                    <td>{{ paciente.nome_completo }}</td>
-                    <td>{{ paciente.motivo }}</td>
-                    <td>{{ paciente.diagnostico }}</td>
-                    <td>{{ paciente.tratamento }}</td>
-                    <td>{{ paciente.recomendacoes }}</td>
-                    <td class="acao-col" width="210">
-                        <a href="#" class="btn-editar">Editar</a>
-                        <a href="#" class="btn-remover" onclick="return confirm('Tem certeza que deseja remover esta história clínica?')">Remover</a>
-                    </td>
-                </tr>
+                    {% if paciente.historias_clinicas.all %}
+                        {% for historia in paciente.historias_clinicas.all %}
+                        <tr>
+                            <td>{{ paciente.nome_completo }}</td>
+                            <td>{{ historia.data_criacao|date:"d/m/Y H:i" }}</td>
+                            <td>{{ historia.motivo }}</td>
+                            <td>{{ historia.diagnostico }}</td>
+                            <td>{{ historia.tratamento }}</td>
+                            <td>{{ historia.recomendacoes }}</td>
+                            <td>
+                                <a href="{% url 'editar_historia_clinica' paciente.id historia.id %}" class="botao botao-editar">Editar</a>
+                                <a href="{% url 'remover_historia_clinica' paciente.id historia.id %}" class="botao botao-remover"
+                                   onclick="return confirm('Tem certeza que deseja remover esta história clínica?')">Remover</a>
+                                <a href="{% url 'detalhes_historia_clinica' paciente.id historia.id %}" class="botao botao-detalhes">Detalhes</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>{{ paciente.nome_completo }}</td>
+                            <td colspan="5"><em>Sem histórias clínicas</em></td>
+                            <td>
+                                <a href="{% url 'cadastrar_historia_clinica' paciente.id %}" class="botao botao-principal">Cadastrar História</a>
+                            </td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
-    {% else %}
-        <p>Nenhuma história clínica registrada.</p>
-    {% endif %}
+    </div>
+{% else %}
+    <p class="mensagem-vazia">Nenhuma história clínica registrada.</p>
+{% endif %}
 {% endblock %}

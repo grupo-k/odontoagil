@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Cadastrar História Clínica para {{ paciente.nome_completo }}</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Motivo:</label><br>
+    <textarea name="motivo"></textarea><br>
+
+    <label>Diagnóstico:</label><br>
+    <textarea name="diagnostico"></textarea><br>
+
+    <label>Tratamento:</label><br>
+    <textarea name="tratamento"></textarea><br>
+
+    <label>Recomendações:</label><br>
+    <textarea name="recomendacoes"></textarea><br>
+
+    <button type="submit">Salvar</button>
+    <a href="{% url 'historia_clinica' %}">Cancelar</a>
+</form>
+{% endblock %}
