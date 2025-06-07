@@ -6,30 +6,40 @@
 {% endblock %}
 
 {% block content %}
-    <header class="cabecalho-conteudo">
-        <h1 class="titulo-pagina">Usuários</h1>
-    </header>
+<header class="cabecalho-conteudo">
+    <h1 class="titulo-pagina">Usuários</h1>
+    <a href="{% url 'cadastrar_usuario' %}" class="botao botao-principal">Cadastrar Novo Usuário</a>
+</header>
 
-    {% if usuarios %}
-        <div class="tabela-responsiva">
-            <table class="tabela-usuarios">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for usuario in usuarios %}
-                    <tr>
-                        <td>{{ usuario.nome_completo }}</td>
-                        <td>{{ usuario.email }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    {% else %}
-        <p class="mensagem-vazia">Nenhum usuário cadastrado.</p>
-    {% endif %}
+{% if usuarios %}
+    <div class="tabela-responsiva">
+        <table class="tabela-usuarios">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Cargo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.nome }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.telefone }}</td>
+                    <td>{{ usuario.cargo }}</td>
+                    <td>
+                        <a href="{% url 'editar_usuario' usuario.id %}" class="botao botao-editar">Editar</a>
+                        <a href="{% url 'remover_usuario' usuario.id %}" class="botao botao-remover" onclick="return confirm('Tem certeza que deseja remover este usuário?')">Remover</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p class="mensagem-vazia">Nenhum usuário cadastrado.</p>
+{% endif %}
 {% endblock %}
