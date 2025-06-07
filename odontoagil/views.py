@@ -195,7 +195,7 @@ def detalhes_servicos(request, id):
     return render(request, 'servicos/detalhes_servicos.html', {'servico': servico})
 
 
-# USUÁRIOS
+# USUÁRIO
 
 def listar_usuarios(request):
     usuarios = Usuario.objects.all()  # nome mais descritivo (plural)
