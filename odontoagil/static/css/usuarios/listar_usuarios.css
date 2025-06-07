@@ -1,8 +1,14 @@
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* listar_usuarios.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.titulo-pagina {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
 }
 
 .cabecalho-conteudo {
@@ -12,35 +18,33 @@
     margin-bottom: 20px;
 }
 
-.titulo-pagina {
-    font-size: 2rem;
-    color: #333;
-}
-
 .botao {
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
     text-decoration: none;
-    color: #fff;
-    font-weight: bold;
+    font-size: 14px;
     cursor: pointer;
 }
 
 .botao-principal {
-    background-color: #3498db;
+    background-color: #007bff;
+    color: white;
 }
 
 .botao-editar {
-    background-color: #f1c40f;
+    background-color: #ffc107;
+    color: #000;
+    margin-right: 5px;
 }
 
 .botao-remover {
-    background-color: #e74c3c;
+    background-color: #dc3545;
+    color: white;
 }
 
-.botao-detalhes {
-    background-color: #2ecc71;
+.botao:hover {
+    opacity: 0.9;
 }
 
 .tabela-responsiva {
@@ -50,41 +54,24 @@
 .tabela-usuarios {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    background-color: white;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
 }
 
 .tabela-usuarios th,
 .tabela-usuarios td {
     padding: 12px;
+    border: 1px solid #dee2e6;
     text-align: left;
-    border-bottom: 1px solid #ddd;
 }
 
 .tabela-usuarios th {
-    background-color: #f8f8f8;
-    font-weight: bold;
-    color: #444;
-}
-
-.tabela-usuarios td {
-    color: #555;
+    background-color: #f1f1f1;
+    color: #333;
 }
 
 .mensagem-vazia {
-    text-align: center;
-    color: #999;
-    margin-top: 40px;
-    font-size: 1.2rem;
-}
-
-@media (max-width: 768px) {
-    .cabecalho-conteudo {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .titulo-pagina {
-        font-size: 1.5rem;
-    }
+    font-style: italic;
+    color: #888;
+    margin-top: 20px;
 }

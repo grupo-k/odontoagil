@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Cadastrar Usuário</h2>
+<form method="post">
+  {% csrf_token %}
+  <label>Nome:</label><input type="text" name="nome" required><br>
+  <label>Email:</label><input type="email" name="email" required><br>
+  <label>Telefone:</label><input type="text" name="telefone"><br>
+  <label>Cargo:</label><input type="text" name="cargo"><br>
+  <button type="submit">Salvar</button>
+</form>
+<a href="{% url 'listar_usuarios' %}">Voltar</a>
+{% endblock %}

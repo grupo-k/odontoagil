@@ -198,5 +198,48 @@ def detalhes_servicos(request, id):
 # USUÁRIOS
 
 def listar_usuarios(request):
-    usuarios = Usuario.objects.all()
+    usuarios = Usuario.objects.all()  # nome mais descritivo (plural)
     return render(request, 'usuarios/listar_usuarios.html', {'usuarios': usuarios})
+
+
+def cadastrar_usuario(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        telefone = request.POST.get('telefone')
+        cargo = request.POST.get('cargo')
+
+        Usuario.objects.create(
+            nome=nome,
+            email=email,
+            telefone=telefone,
+            cargo=cargo
+        )
+        return redirect('listar_usuarios')
+
+    return render(request, 'usuarios/cadastrar_usuario.html')
+
+
+def editar_usuario(request, id):
+    usuario = get_object_or_404(Usuario, id=id)
+
+    if request.method == 'POST':
+        usuario.nome = request.POST.get('nome')
+        usuario.email = request.POST.get('email')
+        usuario.telefone = request.POST.get('telefone')
+        usuario.cargo = request.POST.get('cargo')
+        usuario.save()
+        return redirect('listar_usuarios')
+
+    return render(request, 'usuarios/editar_usuario.html', {'usuario': usuario})
+
+
+def remover_usuario(request, id):
+    usuario = get_object_or_404(Usuario, id=id)
+    usuario.delete()
+    return redirect('listar_usuarios')
+
+
+def detalhes_usuario(request, id):
+    usuario = get_object_or_404(Usuario, id=id)
+    return render(request, 'usuarios/detalhes_usuario.html', {'usuario': usuario})

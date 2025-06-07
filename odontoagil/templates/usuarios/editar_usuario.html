@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Editar Usuário</h2>
+<form method="post">
+  {% csrf_token %}
+  <label>Nome:</label><input type="text" name="nome" value="{{ usuario.nome }}" required><br>
+  <label>Email:</label><input type="email" name="email" value="{{ usuario.email }}" required><br>
+  <label>Telefone:</label><input type="text" name="telefone" value="{{ usuario.telefone }}"><br>
+  <label>Cargo:</label><input type="text" name="cargo" value="{{ usuario.cargo }}"><br>
+  <button type="submit">Atualizar</button>
+</form>
+<a href="{% url 'listar_usuarios' %}">Voltar</a>
+{% endblock %}
