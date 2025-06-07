@@ -113,7 +113,7 @@ SERVICOS = [
         'codigo_servicos_secundario': 'cod02',
         'descricao_servicos_secundario': 'Polimento e aplicação de flúor2.',
         'aparelho_apoio': 'Jatos de bicarbonato.',
-        'Observacoes': 'Essa limpeza visa prevenir problemas como cárie, placa bacteriana e gengivite.',
+        'observacoes': 'Essa limpeza visa prevenir problemas como cárie, placa bacteriana e gengivite.',
         },
     {
         'id': 2,
@@ -122,7 +122,7 @@ SERVICOS = [
         'material_usado': 'Bicarbonato, extratores de tártaro, curetas e ultrassom odontológico e flúor2.',
         'descricao_servicos': 'Limpeza Dental - Remoção de placa bacteriana, tártaro e manchas dos dentes.',
         'codigo_servicos_secundario': 'cod04',
-        'descricao_servicos_secundário': 'Polimento e aplicação de flúor2.',
+        'descricao_servicos_secundario': 'Polimento e aplicação de flúor2.',
         'aparelho_apoio': 'Jatos de bicarbonato.',
         'observacoes': 'Essa limpeza visa prevenir problemas como cárie, placa bacteriana e gengivite.',
     },
@@ -265,10 +265,10 @@ def historia_clinica(request):
     pacientes_com_historia = []
 
     for paciente in PACIENTES:
-        historia = next((h for h in HISTORIAS_CLINICAS if h['paciente_id'] == paciente['id']), None)
-        if historia:
+        historias = [h for h in HISTORIAS_CLINICAS if h['paciente_id'] == paciente['id']]
+        if historias:
             paciente_copy = paciente.copy()
-            paciente_copy.update(historia)
+            paciente_copy['historias'] = historias
             pacientes_com_historia.append(paciente_copy)
 
     context = {
@@ -310,7 +310,7 @@ def cadastrar_servicos(request):
         data_inclusao = request.POST.get('data_inclusao')
         codigo_servicos = request.POST.get('codigo_servicos')
         material_usado = request.POST.get('material_usado')
-        descricao_servicos = request.POST.get('descricao_servvicos')
+        descricao_servicos = request.POST.get('descricao_servicos')
         codigo_servicos_secundario = request.POST.get('codigo_servicos_secundario')
         descricao_servicos_secundario = request.POST.get('descricao_servicos_secundario')
         aparelho_apoio = request.POST.get('aparelho_apoio')
@@ -321,7 +321,7 @@ def cadastrar_servicos(request):
             'data_inclusao': data_inclusao,
             'codigo_servicos': codigo_servicos,
             'material_usado' : material_usado,
-            'descricao_servicos' : descricao_servvicos,
+            'descricao_servicos' : descricao_servicos,
             'codigo_servicos_secundario' : codigo_servicos_secundario,
             'descricao_servicos_secundario' : descricao_servicos_secundario,
             'aparelho_apoio' : aparelho_apoio,
@@ -348,14 +348,14 @@ def editar_servicos(request, id):
         return redirect('listar_servicos')  
     
     if request.method == 'POST':
-        servico['data_inclusao'] = request.POST.get('data_inclusao')
-        servico['codigo_servicos'] = request.POST.get('codigo_servicos')
-        servico['material_usado'] = request.POST.get('material_usado')
-        servico['descricao_servicos'] = request.POST.get('descricao_servicos')
-        servico['codigo_servicos_secundario'] = request.POST.get('codigo_servicos_secundario')
-        servico['descricao_servicos_secundario'] = request.POST.get('descricao_servicos_secundario')
-        servico['aparelho_apoio'] = request.POST.get('aparelho_apoio')
-        servico['observacoes'] = request.POST.get('observacoes')
+        servicos['data_inclusao'] = request.POST.get('data_inclusao')
+        servicos['codigo_servicos'] = request.POST.get('codigo_servicos')
+        servicos['material_usado'] = request.POST.get('material_usado')
+        servicos['descricao_servicos'] = request.POST.get('descricao_servicos')
+        servicos['codigo_servicos_secundario'] = request.POST.get('codigo_servicos_secundario')
+        servicos['descricao_servicos_secundario'] = request.POST.get('descricao_servicos_secundario')
+        servicos['aparelho_apoio'] = request.POST.get('aparelho_apoio')
+        servicos['observacoes'] = request.POST.get('observacoes')
         return redirect('listar_servicos')
 
     return render(request, 'servicos/editar_servicos.html', {'servicos': servicos})
