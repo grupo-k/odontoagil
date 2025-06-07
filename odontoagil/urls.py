@@ -1,59 +1,32 @@
-"""
-URL configuration for odontoagil project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
-
-from .views import (
-    historia_clinica,
-    index,
-    listar_paciente,
-    cadastrar_paciente,
-    remover_paciente,
-    editar_paciente,
-    detalhes_paciente,
-    listar_servicos,
-    cadastrar_servicos,
-    remover_servicos,
-    editar_servicos,
-    detalhes_servicos,
-    listar_usuarios,
-)
+from odontoagil import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
+    path('', views.index, name='index'),
 
-    # pacientes
-    path('pacientes/', listar_paciente, name='listar_paciente'),
-    path('pacientes/cadastrar/', cadastrar_paciente, name='cadastrar_paciente'),
-    path('pacientes/remover/<int:id>/', remover_paciente, name='remover_paciente'),
-    path('pacientes/editar/<int:id>/', editar_paciente, name='editar_paciente'),
-    path('pacientes/detalhes/<int:id>/', detalhes_paciente, name='detalhes_paciente'),
-    
-    # historia clinica
-    path('historia_clinica/', historia_clinica, name='historia_clinica'),
+    # Pacientes
+    path('pacientes/', views.listar_paciente, name='listar_paciente'),
+    path('pacientes/cadastrar/', views.cadastrar_paciente, name='cadastrar_paciente'),
+    path('pacientes/editar/<int:id>/', views.editar_paciente, name='editar_paciente'),
+    path('pacientes/remover/<int:id>/', views.remover_paciente, name='remover_paciente'),
+    path('pacientes/detalhes/<int:id>/', views.detalhes_paciente, name='detalhes_paciente'),
 
-    # servicos  
-    path('servicos/', listar_servicos, name='listar_servicos'),
-    path('servicos/cadastrar/', cadastrar_servicos, name='cadastrar_servicos'),
-    path('servicos/remover/<int:id>/', remover_servicos, name='remover_servicos'),
-    path('servicos/editar/<int:id>/', editar_servicos, name='editar_servicos'),
-    path('servicos/detalhes/<int:id>/', detalhes_servicos, name='detalhes_servicos'),
+   # História Clínica
+    path('historia_clinica/', views.historia_clinica, name='historia_clinica'),
+    path('historia_clinica/cadastrar/<int:paciente_id>/', views.cadastrar_historia_clinica, name='cadastrar_historia_clinica'),  # Nova rota
+    path('historia_clinica/editar/<int:paciente_id>/<str:data_consulta>/', views.editar_historia_clinica, name='editar_historia_clinica'),
+    path('historia_clinica/remover/<int:paciente_id>/<str:data_consulta>/', views.remover_historia_clinica, name='remover_historia_clinica'),
+    path('historia_clinica/detalhes/<int:paciente_id>/<int:historia_id>/', views.detalhes_historia_clinica, name='detalhes_historia_clinica'),
 
-    # usuarios
-    path('usuarios/', listar_usuarios, name='listar_usuarios'),
+    # Serviços
+    path('servicos/', views.listar_servicos, name='listar_servicos'),
+    path('servicos/cadastrar/', views.cadastrar_servicos, name='cadastrar_servicos'),
+    path('servicos/editar/<int:id>/', views.editar_servicos, name='editar_servicos'),
+    path('servicos/remover/<int:id>/', views.remover_servicos, name='remover_servicos'),
+    path('servicos/detalhes/<int:id>/', views.detalhes_servicos, name='detalhes_servicos'),
+
+    # Usuários
+    path('usuarios/', views.listar_usuarios, name='listar_usuarios'),
 ]
