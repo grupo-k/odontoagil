@@ -114,6 +114,21 @@ def remover_historia_clinica(request, paciente_id, historia_id):
     historia.delete()
     return redirect('historia_clinica')
 
+#remover_historia_clinica
+from django.shortcuts import get_object_or_404, redirect
+from .models import Paciente, HistoriaClinica
+
+def remover_historia_clinica(request, paciente_id, historia_id):
+    # Busca o paciente e a história clínica correspondentes
+    paciente = get_object_or_404(Paciente, id=paciente_id)
+    historia = get_object_or_404(HistoriaClinica, id=historia_id, paciente=paciente)
+    
+    # Exclui a história clínica
+    historia.delete()
+    
+    # Redireciona de volta para a lista de histórias clínicas ou outra página desejada
+    return redirect('listar_historia_clinica', paciente_id=paciente.id)
+
 #detalhes_historia_clinica
 def detalhes_historia_clinica(request, paciente_id, historia_id):
     paciente = get_object_or_404(Paciente, id=paciente_id)
