@@ -6,14 +6,18 @@
 }
 
 .cabecalho-conteudo {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     row-gap: 1rem;
     margin-bottom: 2rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
+/* Botões */
 .botao {
     display: inline-block;
     padding: 0.6rem 1.2rem;
@@ -62,9 +66,12 @@
     background-color: #e67e22;
 }
 
+/* Tabela responsiva */
 .tabela-responsiva {
     width: 100%;
     overflow-x: auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 .tabela-servicos {
