@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Paciente, HistoriaClinica, Tratamento, Procedimento, Servico, Usuario
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
+from django.utils import timezone
 
 # INDEX
 def index(request):
@@ -7,11 +10,16 @@ def index(request):
 
 # PACIENTES
 
+@login_required
 def listar_paciente(request):
     pacientes = Paciente.objects.all()
     return render(request, 'pacientes/listar_paciente.html', {'pacientes': pacientes})
 
+@login_required
 def cadastrar_paciente(request):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para cadastrar pacientes.")
+    
     if request.method == 'POST':
         paciente = Paciente(
             nome_completo=request.POST.get('nome_completo'),
@@ -37,7 +45,11 @@ def cadastrar_paciente(request):
 
     return render(request, 'pacientes/cadastrar_paciente.html')
 
+@login_required
 def editar_paciente(request, id):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para editar pacientes.")
+    
     paciente = get_object_or_404(Paciente, id=id)
 
     if request.method == 'POST':
@@ -50,32 +62,35 @@ def editar_paciente(request, id):
 
     return render(request, 'pacientes/editar_paciente.html', {'paciente': paciente})
 
+@login_required
 def remover_paciente(request, id):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para remover pacientes.")
+    
     paciente = get_object_or_404(Paciente, id=id)
     paciente.delete()
     return redirect('listar_paciente')
 
+@login_required
 def detalhes_paciente(request, id):
     paciente = get_object_or_404(Paciente, id=id)
     return render(request, 'pacientes/detalhes_paciente.html', {'paciente': paciente})
 
 # HISTÓRIA CLÍNICA
 
+@login_required
 def historia_clinica(request):
     pacientes = Paciente.objects.prefetch_related('historias_clinicas').all()
-    # Isso carrega pacientes com as histórias clínicas associadas de forma eficiente
-
     context = {
         'pacientes': pacientes
     }
     return render(request, 'historia_clinica/historia_clinica.html', context)
 
-#cadastrar_historia_clinica
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Paciente, HistoriaClinica
-from django.utils import timezone
-
+@login_required
 def cadastrar_historia_clinica(request, paciente_id):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para cadastrar história clínica.")
+
     paciente = get_object_or_404(Paciente, id=paciente_id)
 
     if request.method == 'POST':
@@ -97,7 +112,11 @@ def cadastrar_historia_clinica(request, paciente_id):
 
     return render(request, 'historia_clinica/cadastrar_historia_clinica.html', {'paciente': paciente})
 
+@login_required
 def editar_historia_clinica(request, paciente_id, historia_id):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para editar história clínica.")
+
     historia = get_object_or_404(HistoriaClinica, id=historia_id, paciente_id=paciente_id)
 
     if request.method == 'POST':
@@ -109,18 +128,17 @@ def editar_historia_clinica(request, paciente_id, historia_id):
     paciente = historia.paciente
     return render(request, 'historia_clinica/editar_historia_clinica.html', {'historia': historia, 'paciente': paciente})
 
+@login_required
 def remover_historia_clinica(request, paciente_id, historia_id):
-    # Busca o paciente e a história clínica correspondentes
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para remover história clínica.")
+
     paciente = get_object_or_404(Paciente, id=paciente_id)
     historia = get_object_or_404(HistoriaClinica, id=historia_id, paciente=paciente)
-    
-    # Exclui a história clínica
     historia.delete()
-    
-    # Redireciona de volta para a lista de histórias clínicas ou outra página desejada
     return redirect('historia_clinica')
 
-#detalhes_historia_clinica
+@login_required
 def detalhes_historia_clinica(request, paciente_id, historia_id):
     paciente = get_object_or_404(Paciente, id=paciente_id)
     historia = get_object_or_404(HistoriaClinica, id=historia_id, paciente=paciente)
@@ -132,23 +150,30 @@ def detalhes_historia_clinica(request, paciente_id, historia_id):
 
 # TRATAMENTOS
 
+@login_required
 def tratamentos(request):
     tratamentos = Tratamento.objects.select_related('paciente').all()
     return render(request, 'tratamentos/tratamentos.html', {'tratamentos': tratamentos})
 
 # PROCEDIMENTOS
 
+@login_required
 def listar_procedimentos(request):
     procedimentos = Procedimento.objects.all()
     return render(request, 'procedimentos/listar_procedimentos.html', {'procedimentos': procedimentos})
 
 # SERVIÇOS
 
+@login_required
 def listar_servicos(request):
     servicos = Servico.objects.all()
     return render(request, 'servicos/listar_servicos.html', {'servicos': servicos})
 
+@login_required
 def cadastrar_servicos(request):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para cadastrar serviços.")
+
     if request.method == 'POST':
         codigo_servicos = request.POST.get('codigo_servicos')
         material_usado = request.POST.get('material_usado')
@@ -168,11 +193,15 @@ def cadastrar_servicos(request):
             observacoes=observacoes
         )
         servico.save()
-        return redirect('listar_servicos')  # ou outra URL que queira após cadastro
+        return redirect('listar_servicos')
 
     return render(request, 'servicos/cadastrar_servicos.html')
 
+@login_required
 def editar_servicos(request, id):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para editar serviços.")
+
     servico = get_object_or_404(Servico, id=id)
 
     if request.method == 'POST':
@@ -185,24 +214,32 @@ def editar_servicos(request, id):
 
     return render(request, 'servicos/editar_servicos.html', {'servico': servico})
 
+@login_required
 def remover_servicos(request, id):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para remover serviços.")
+
     servico = get_object_or_404(Servico, id=id)
     servico.delete()
     return redirect('listar_servicos')
 
+@login_required
 def detalhes_servicos(request, id):
     servico = get_object_or_404(Servico, id=id)
     return render(request, 'servicos/detalhes_servicos.html', {'servico': servico})
 
-
 # USUÁRIO
 
+@login_required
 def listar_usuarios(request):
-    usuarios = Usuario.objects.all()  # nome mais descritivo (plural)
+    usuarios = Usuario.objects.all()
     return render(request, 'usuarios/listar_usuarios.html', {'usuarios': usuarios})
 
-
+@login_required
 def cadastrar_usuario(request):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para cadastrar usuários.")
+
     if request.method == 'POST':
         nome = request.POST.get('nome')
         email = request.POST.get('email')
@@ -219,8 +256,11 @@ def cadastrar_usuario(request):
 
     return render(request, 'usuarios/cadastrar_usuario.html')
 
-
+@login_required
 def editar_usuario(request, id):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para editar usuários.")
+
     usuario = get_object_or_404(Usuario, id=id)
 
     if request.method == 'POST':
@@ -233,13 +273,16 @@ def editar_usuario(request, id):
 
     return render(request, 'usuarios/editar_usuario.html', {'usuario': usuario})
 
-
+@login_required
 def remover_usuario(request, id):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Você não tem permissão para remover usuários.")
+
     usuario = get_object_or_404(Usuario, id=id)
     usuario.delete()
     return redirect('listar_usuarios')
 
-
+@login_required
 def detalhes_usuario(request, id):
     usuario = get_object_or_404(Usuario, id=id)
     return render(request, 'usuarios/detalhes_usuario.html', {'usuario': usuario})
