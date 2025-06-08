@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/historia_clinica/historia_clinica.css' %}">
+<style>
+    .table td.acao-col {
+        min-width: 180px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <h1>Histórias Clínicas</h1>
+        <a href="{% url 'cadastrar_paciente' %}" class="btn-novo">Cadastrar Novo Paciente</a>
+    </div>
+
+    {% if pacientes %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Motivo</th>
+                    <th>Diagnóstico</th>
+                    <th>Tratamento</th>
+                    <th>Recomendações</th>
+                    <th class="acao-col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paciente in pacientes %}
+                <tr>
+                    <td>{{ paciente.nome_completo }}</td>
+                    <td>{{ paciente.motivo }}</td>
+                    <td>{{ paciente.diagnostico }}</td>
+                    <td>{{ paciente.tratamento }}</td>
+                    <td>{{ paciente.recomendacoes }}</td>
+                    <td class="acao-col" width="210">
+                        <a href="#" class="btn-editar">Editar</a>
+                        <a href="#" class="btn-remover" onclick="return confirm('Tem certeza que deseja remover esta história clínica?')">Remover</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nenhuma história clínica registrada.</p>
+    {% endif %}
+{% endblock %}

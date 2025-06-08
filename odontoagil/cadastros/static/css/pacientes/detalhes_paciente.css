@@ -1,0 +1,33 @@
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 1em;
+    color: #333;
+}
+
+.detalhes-paciente {
+    line-height: 1.8;
+    font-size: 1.1em;
+    color: #444;
+}
+
+.detalhes-paciente p {
+    margin-bottom: 0.8em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5em;
+}
+
+.botao-voltar {
+    display: inline-block;
+    margin-top: 2em;
+    padding: 0.8em 1.5em;
+    background-color: #009AA5;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.botao-voltar:hover {
+    background-color: #007c83;
+}

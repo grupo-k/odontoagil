@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/servicos/listar_servicos.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="cabecalho-conteudo">
+        <h1 class="titulo-pagina">Servicos</h1>
+        <a href="{% url 'cadastrar_servicos' %}" class="botao botao-principal">Cadastrar Novo Servicos</a>
+    </header>
+
+    {% if servicos %}
+        <div class="tabela-responsiva">
+            <table class="tabela-servicos">
+                <thead>
+                    <tr>
+                        <th>Data Inclusao Servicos</th>
+                        <th>Codigo do Servicos</th>
+                        <th>Material Usado</th>
+                        <th>Descricao do Servicos</th>
+                        <th>Codigo do Servicos secundarios</th>
+                        <th>Descricao do Serviços Secundario</th>
+                        <th>Aparelhos de Apoio</th>
+                        <th>Observacoes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for servicos in servicos %}
+                    <tr>
+                        <td>{{ servicos.data_inclusao_servicos }}</td>
+                        <td>{{ servicos.codigo_servicos }}</td>
+                        <td>{{ servicos.material_usado }}</td>
+                        <td>{{ servicos.descricao_servicos }}</td>
+                        <td>{{ servicos.codigo_servicos_secundarios }}</td>
+                        <td>{{ servicos.descricao_servicos_secundario }}</td>
+                        <td>{{ servicos.aparelho_apoio }}</td>
+                        <td>{{ servicos.observacoes }}</td>
+                        <td>
+                            <a href="{% url 'editar_servicos' servicos.id %}" class="botao botao-editar">Editar</a>
+                            <a href="{% url 'remover_servicos' servicos.id %}" class="botao botao-remover" onclick="return confirm('Tem certeza que deseja remover este servico?')">Remover</a>
+                            <a href="{% url 'detalhes_servicos' servicos.id %}" class="botao botao-detalhes">Detalhes</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+            <p class="mensagem-vazia">Nenhum Servicos cadastrado.</p>
+    {% endif %}
+{% endblock %}

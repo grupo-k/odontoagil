@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/servicos/detalhes_servicos.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Detalhes do Servicos</h2>
+
+<div class="detalhes-servicos">
+    <p><strong>Data Inclusao:</strong> {{ servicos.data_inclusao }}</p>
+    <p><strong>Codigo Servico:</strong> {{ servicos.codigo_servico }}</p>
+    <p><strong>Material Usado:</strong> {{ servicos.material_usado }}</p>
+    <p><strong>Descricao Servico:</strong> {{ servicos.descricao_servicos }}</p>
+    <p><strong>Codigo Servico Secundario:</strong> {{ servicos.codigo_servico_secundario }}</p>
+    <p><strong>Descricao Servico Secundario:</strong> {{ servicos.descricao_servicos_secundario }}</p>
+    <p><strong>Aparelhos Apoio:</strong> {{ servicos.aparelhos_apoio }}</p>
+    <p><strong>Observacoes:</strong> {{ servicos.observacoes }}</p>
+</div>
+
+<a href="{% url 'listar_servicos' %}" class="botao-voltar">Voltar</a>
+{% endblock %}
