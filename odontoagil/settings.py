@@ -99,6 +99,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_URL = 'login'          # nome da url do login
+LOGIN_REDIRECT_URL = 'index' # para onde o usuário vai após logar
+LOGOUT_REDIRECT_URL = 'login' # para onde vai depois de logout
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -122,3 +127,10 @@ STATICFILES_DIRS = [BASE_DIR / 'odontoagil/static']
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 300  # 5 minutos (tempo em segundos)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
+
