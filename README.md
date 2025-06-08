@@ -1,6 +1,6 @@
 # Usuário Administrador 👤👤
-login: admin
-senha: admin
+- login: admin
+- senha: admin
 
 # OdontoÁgil 🦷  
 Desenvolvimento do projeto OdontoÁgil do TADS da UDESC
