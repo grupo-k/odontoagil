@@ -15,7 +15,7 @@ urlpatterns = [
     path('pacientes/remover/<int:id>/', views.remover_paciente, name='remover_paciente'),
     path('pacientes/detalhes/<int:id>/', views.detalhes_paciente, name='detalhes_paciente'),
 
-   # História Clínica
+    # História Clínica
     path('historia_clinica/', views.historia_clinica, name='historia_clinica'),
     path('historia_clinica/cadastrar/<int:paciente_id>/', views.cadastrar_historia_clinica, name='cadastrar_historia_clinica'),  # Nova rota
     path('historia_clinica/editar/<int:paciente_id>/<int:historia_id>/', views.editar_historia_clinica, name='editar_historia_clinica'),
@@ -25,7 +25,7 @@ urlpatterns = [
     # Serviços
     path('servicos/', views.listar_servicos, name='listar_servicos'),
     path('servicos/cadastrar/', views.cadastrar_servicos, name='cadastrar_servicos'),
-    path('servicos/editar/<int:id>/', views.editar_servicos, name='editar_servicos'),
+    path('servicos/editar/<int:pk>/', views.editar_servico, name='editar_servicos'),
     path('servicos/remover/<int:id>/', views.remover_servicos, name='remover_servicos'),
     path('servicos/detalhes/<int:id>/', views.detalhes_servicos, name='detalhes_servicos'),
 

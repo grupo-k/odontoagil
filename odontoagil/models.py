@@ -56,17 +56,17 @@ class Procedimento(models.Model):
 
 
 class Servico(models.Model):
-    data_inclusao = models.DateField(default=date.today)
-    codigo_servicos = models.CharField(max_length=50, default="sem código")
-    material_usado = models.CharField(max_length=200, default="sem material")
-    descricao_servicos = models.TextField(default="sem descrição")
-    codigo_servicos_secundario = models.CharField(max_length=50, blank=True, null=True)
-    descricao_servicos_secundario = models.TextField(default="sem descrição")
-    aparelho_apoio = models.CharField(max_length=200, default="sem aparelho")
-    observacoes = models.TextField(default="sem observações")
+    data_inclusao = models.DateField()
+    codigo_servicos = models.CharField(max_length=100)
+    material_usado = models.CharField(max_length=255)
+    descricao_servicos = models.TextField()
+    codigo_servicos_secundario = models.CharField(max_length=100, blank=True, null=True)
+    descricao_servicos_secundario = models.TextField(blank=True, null=True)
+    aparelho_apoio = models.CharField(max_length=255, blank=True, null=True)
+    observacoes = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"Serviço {self.codigo_servicos} - {self.descricao_servicos}"
+        return self.descricao_servicos
 
 
 class Usuario(models.Model):

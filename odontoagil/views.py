@@ -3,6 +3,8 @@ from .models import Paciente, HistoriaClinica, Tratamento, Procedimento, Servico
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.utils import timezone
+from . import views
+from datetime import date
 
 # INDEX
 def index(request):
@@ -54,8 +56,8 @@ def editar_paciente(request, id):
 
     if request.method == 'POST':
         for field in ['nome_completo', 'telefone', 'email', 'idade', 'sexo', 'data_nascimento', 'cpf',
-                      'estado_civil', 'rg', 'cidade', 'estado', 'profissao', 'nome_mae', 'nome_pai',
-                      'nome_contato_familiar', 'grau_parentesco', 'telefone_contato_familiar']:
+                    'estado_civil', 'rg', 'cidade', 'estado', 'profissao', 'nome_mae', 'nome_pai',
+                    'nome_contato_familiar', 'grau_parentesco', 'telefone_contato_familiar']:
             setattr(paciente, field, request.POST.get(field))
         paciente.save()
         return redirect('listar_paciente')
@@ -173,46 +175,57 @@ def listar_servicos(request):
 def cadastrar_servicos(request):
     if not request.user.is_staff:
         return HttpResponseForbidden("Você não tem permissão para cadastrar serviços.")
-
     if request.method == 'POST':
-        codigo_servicos = request.POST.get('codigo_servicos')
-        material_usado = request.POST.get('material_usado')
-        descricao_servicos = request.POST.get('descricao_servicos')
-        codigo_servicos_secundario = request.POST.get('codigo_servicos_secundario')
-        descricao_servicos_secundario = request.POST.get('descricao_servicos_secundario')
-        aparelho_apoio = request.POST.get('aparelho_apoio')
-        observacoes = request.POST.get('observacoes')
-
-        servico = Servico(
-            codigo_servicos=codigo_servicos,
-            material_usado=material_usado,
-            descricao_servicos=descricao_servicos,
-            codigo_servicos_secundario=codigo_servicos_secundario,
-            descricao_servicos_secundario=descricao_servicos_secundario,
-            aparelho_apoio=aparelho_apoio,
-            observacoes=observacoes
-        )
-        servico.save()
-        return redirect('listar_servicos')
-
-    return render(request, 'servicos/cadastrar_servicos.html')
+        print("--- DEBUG: Conteúdo de request.POST ---")
+        print(request.POST)
+        print("-------------------------------------")
+        servico = Servico()
+        servico.data_inclusao = request.POST.get('data_inclusao')
+        servico.codigo_servicos = request.POST.get('codigo_servicos')
+        servico.material_usado = request.POST.get('material_usado')
+        servico.descricao_servicos = request.POST.get('descricao_servicos')
+        servico.codigo_servicos_secundario = request.POST.get('codigo_servicos_secundario')
+        servico.descricao_servicos_secundario = request.POST.get('descricao_servicos_secundario')
+        servico.aparelho_apoio = request.POST.get('aparelho_apoio')
+        servico.observacoes = request.POST.get('observacoes')
+        if not servico.data_inclusao:
+            print("DEBUG: data_inclusao está faltando ou vazia nos dados POST!")
+        try:
+            servico.save()
+            return redirect('some_success_url')
+        except Exception as e:
+            print(f"Error saving service: {e}")
+            return render(request, 'servicos/cadastrar_servicos.html',
+                    {'error_message': 'Erro ao salvar serviço. Verifique todos os campos.',
+                    'form_data': request.POST})
+    return render(request, 'servicos/cadastrar_servicos.html')            
 
 @login_required
-def editar_servicos(request, id):
+def editar_servico(request, pk):
     if not request.user.is_staff:
         return HttpResponseForbidden("Você não tem permissão para editar serviços.")
-
-    servico = get_object_or_404(Servico, id=id)
-
+    servicos = get_object_or_404(Servico, pk=pk)
+    context = {
+        'servicos': servicos 
+    }
     if request.method == 'POST':
-        for field in ['data_inclusao', 'codigo_servicos', 'material_usado', 'descricao_servicos',
-                      'codigo_servicos_secundario', 'descricao_servicos_secundario', 'aparelho_apoio',
-                      'observacoes']:
-            setattr(servico, field, request.POST.get(field))
-        servico.save()
-        return redirect('listar_servicos')
+        servicos.data_inclusao = request.POST.get('data_inclusao')
+        servicos.codigo_servicos = request.POST.get('codigo_servicos')
+        servicos.material_usado = request.POST.get('material_usado')
+        servicos.descricao_servicos = request.POST.get('descricao_servicos')
+        servicos.codigo_servicos_secundario = request.POST.get('codigo_servicos_secundario')
+        servicos.descricao_servicos_secundario = request.POST.get('descricao_servicos_secundario')
+        servicos.aparelho_apoio = request.POST.get('aparelho_apoio')
+        servicos.observacoes = request.POST.get('observacoes')
 
-    return render(request, 'servicos/editar_servicos.html', {'servico': servico})
+        try:
+            servicos.save()
+            return redirect('nome_da_sua_url_de_listagem_de_servicos')
+        except Exception as e:
+            print(f"Error saving service during edit: {e}")
+            context['error_message'] = 'Erro ao salvar alterações no serviço. Verifique todos os campos.'
+            context['form_data'] = request.POST
+    return render(request, 'servicos/editar_servicos.html', context)
 
 @login_required
 def remover_servicos(request, id):
