@@ -1,49 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-{% load static %}
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OdontoÁgil</title>
-    <link rel="shortcut icon" type="imagex/png" href="{% static 'img/tooth.ico' %}">
+    <title>{% block title %}OdontoÁgil{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- CSS personalizado -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    {% block extra_css %}
-    {% endblock %}
+
+    {% block head_extra %}{% endblock %}
 </head>
 <body>
 
-    <header class="cabecalho">
-        <div class="img-logotipo">
-            <img src="{% static 'img/logo.png' %}" alt="Logotipo" width="100%"/>
-        </div>
-        <nav class="barra-navegacao">
-            <ul>
-                <li class="item-inicio"><img src="{% static 'img/icons/home.svg' %}" alt="Ícone Home"/><a href="{% url 'index' %}">Início</a></li>
-                <li class="item-paciente"><img src="{% static 'img/icons/pacient.svg' %}" alt="Ícone Paciente"/><a href="{% url 'listar_paciente' %}">Pacientes</a></li>
-                <li class="item-historia"><img src="{% static 'img/icons/file.svg' %}" alt="Ícone História Clínica"/><a href="{% url 'historia_clinica' %}">Histórias Clínicas</a></li>
-                <li class="item-servicos"><img src="{% static 'img/icons/teeth.svg' %}" alt="Ícone Servicos"/><a href="{% url 'listar_servicos' %}">Serviços</a></li>
-                <li class="item-usuarios"><img src="{% static 'img/icons/user.svg' %}" alt="Ícone Usuários"/><a href="{% url 'listar_usuarios' %}">Usuários</a></li>
-            </ul>
-        </nav>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="{% static 'img/logo.png' %}" alt="OdontoÁgil" height="40" class="me-2">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="logout-container" style="margin-top:10px; text-align: right; padding-right: 20px;">
-            {% if user.is_authenticated %}
-                <form method="post" action="{% url 'logout' %}" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn-logout">Sair</button>
-                </form>
-            {% else %}
-                <a href="{% url 'login' %}" class="btn-login">Entrar</a>
-            {% endif %}
-        </div>
-    </header>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="/pacientes/">Pacientes</a></li>
+        <li class="nav-item"><a class="nav-link" href="/historias/">Histórias Clínicas</a></li>
+        <li class="nav-item"><a class="nav-link" href="/servicos/">Serviços</a></li>
+        <li class="nav-item"><a class="nav-link" href="/usuarios/">Usuários</a></li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-link nav-link text-warning" style="padding: 0; border: none;">
+            Sair
+            </button>
+        </form>
+        </li>
+        {% endif %}
+    </div>
+  </div>
+</nav>
 
-    <main class="principal">
-        <div class="conteudo">
-            {% block content %}
-            {% endblock %}
-        </div>
-    </main>
+<!-- Conteúdo -->
+<div class="container mt-4">
+    <h1 class="mb-4">{% block header %}{% endblock %}</h1>
+    {% block content %}{% endblock %}
+</div>
+      </ul>
 
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

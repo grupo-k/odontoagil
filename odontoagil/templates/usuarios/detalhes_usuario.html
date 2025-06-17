@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-{% block content %}
-<h2>Detalhes do Usuário</h2>
-<p><strong>Nome:</strong> {{ usuario.nome }}</p>
-<p><strong>Email:</strong> {{ usuario.email }}</p>
-<p><strong>Telefone:</strong> {{ usuario.telefone }}</p>
-<p><strong>Cargo:</strong> {{ usuario.cargo }}</p>
-<a href="{% url 'listar_usuarios' %}">Voltar</a>
-{% endblock %}

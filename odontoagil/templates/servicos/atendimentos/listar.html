@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Atendimentos{% endblock %}
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/servicos.css' %}">
+{% endblock %}
+{% block header %}Lista de Atendimentos{% endblock %}
+
+{% block content %}
+<a href="{% url 'servicos:atendimentos_criar' %}" class="btn btn-success mb-3">Novo Atendimento</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Paciente</th>
+            <th>Serviço</th>
+            <th>Profissional</th>
+            <th>Data do Atendimento</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for atendimento in atendimentos %}
+        <tr>
+            <td>{{ atendimento.paciente.nome_completo }}</td>
+            <td>{{ atendimento.servico.descricao_servicos }}</td>
+            <td>{{ atendimento.profissional.nome }}</td>
+            <td>{{ atendimento.data_atendimento|date:"d/m/Y H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

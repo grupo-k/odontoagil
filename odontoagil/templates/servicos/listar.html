@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Serviços{% endblock %}
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/servicos.css' %}">
+{% endblock %}
+{% block header %}Lista de Serviços{% endblock %}
+
+{% block content %}
+<a href="{% url 'servicos:criar' %}" class="btn btn-primary mb-2">Novo Serviço</a>
+<a href="{% url 'servicos:atendimentos_criar' %}" class="btn btn-success mb-3 ms-2">Novo Atendimento</a>
+<a href="{% url 'servicos:atendimentos_listar' %}" class="btn btn-outline-secondary mb-3 ms-2">Ver Atendimentos</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Data Inclusão</th>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Material</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for servico in object_list %}
+        <tr>
+            <td>{{ servico.data_inclusao }}</td>
+            <td>{{ servico.codigo_servicos }}</td>
+            <td>{{ servico.descricao_servicos|truncatechars:30 }}</td>
+            <td>{{ servico.material_usado }}</td>
+            <td>
+                <a href="{% url 'servicos:editar' servico.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'servicos:excluir' servico.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
