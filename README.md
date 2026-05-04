@@ -51,8 +51,8 @@ Este projeto foi desenvolvido como parte de um trabalho do Projeto Integrador co
 - **Termo de Abertura de Projeto**  
   [Link do Documento de Termo de Abertura de Projeto](https://docs.google.com/document/d/1G6ahtRzi91YqCVdcB_UAuV6IWnVTXnYd1pucFqxyu7Y/edit?usp=sharing)
   
-- **Mapeamento e Modelagem de Projetos**  
-  [Link do Documento de Mapeamento e Modelagem de Projetos](https://docs.google.com/document/d/1BRuTzVGJSpUqQJ4ZYu39azXTb22mRwOpy-Tufa3WZhk/edit?usp=sharing)
+- **Mapeamento e Modelagem de Processos**  
+  [Link do Documento de Mapeamento e Modelagem de Processos](https://docs.google.com/document/d/1BRuTzVGJSpUqQJ4ZYu39azXTb22mRwOpy-Tufa3WZhk/edit?usp=sharing)
 
 - **Documento de Requisitos**  
   [Link do Documento de Requisitos](https://docs.google.com/document/d/1vemgy5_uxrecuBW98eCzRCLMhwTpBkFL8qJQb1j0ptw)
